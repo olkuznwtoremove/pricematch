@@ -12,9 +12,9 @@
 <div id="pricematchpopup" class="pricematchpopup">
 	<div class="pricematch-loader"></div>
 	<div class="pricematch-error col-xs-12"></div>
-	<div class="std col-xs-12">
+	<div class="rte col-xs-12">
 		{if !empty($description)}
-			{$description|escape:'UTF-8'}
+			{$description}
 		{/if}
 	</div>
 	<form id="pricematchForm" method="post" action="{$pricematchUrl|escape:'htmlall':'UTF-8'}">
