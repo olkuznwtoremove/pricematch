@@ -241,8 +241,8 @@ class AdminPriceMatchRequestsController extends ModuleAdminController
                 null,
                 $module->getMailsDir(),
                 false,
-                $this->context->shop->id )
-            )
+                $this->context->shop->id
+            ) )
             {
                 $logger    = new FileLogger();
                 $logger->setFilename($module->getLogFile());
