@@ -6,8 +6,8 @@
  *
  * Languages: EN
  * PS version: 1.6
- *
  **/
+
 $(document).ready(function() {
 	$("#pricematchButton").fancybox({
 		width: 400,
