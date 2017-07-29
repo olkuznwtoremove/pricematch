@@ -242,9 +242,8 @@ class AdminPriceMatchRequestsController extends ModuleAdminController
                 $module->getMailsDir(),
                 false,
                 $this->context->shop->id
-            ) )
-            {
-                $logger    = new FileLogger();
+            )) {
+                $logger = new FileLogger();
                 $logger->setFilename($module->getLogFile());
                 $logger->logError(sprintf(Tools::displayError('Price match request #%s: error while sending customer\'s email.'), $object->id));
             }

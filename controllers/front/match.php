@@ -68,9 +68,8 @@ class PriceMatchMatchModuleFrontController extends ModuleFrontController
                 null,
                 $this->module->getMailsDir(),
                 false,
-                $this->context->shop->id )
-            )
-            {
+                $this->context->shop->id
+            )) {
                 $logger    = new FileLogger();
                 $logger->setFilename($this->module->getLogFile());
                 $logger->logError(sprintf(Tools::displayError('Price match request #%s: error while sending admin\'s email.'), $matchRequest->id));
@@ -103,8 +102,7 @@ class PriceMatchMatchModuleFrontController extends ModuleFrontController
                 $this->module->getMailsDir(),
                 false,
                 $this->context->shop->id
-            ))
-            {
+            )) {
                 $logger    = new FileLogger();
                 $logger->setFilename($this->module->getLogFile());
                 $logger->logError(sprintf(Tools::displayError('Price match request #%s: error while sending customer\'s email.'), $matchRequest->id));
