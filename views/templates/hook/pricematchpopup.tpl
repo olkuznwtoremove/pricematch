@@ -18,12 +18,12 @@
 		{/if}
 	</div>
 	<form id="pricematchForm" method="post" action="{$pricematchUrl|escape:'htmlall':'UTF-8'}">
-		<input type="hidden" name="id_shop" value="{$id_shop}" />
+		<input type="hidden" name="id_shop" value="{$id_shop|intval}" />
 		<div class="form-group clearfix">
 			<div class="col-sm-6 col-xs-12">
 				<label for="pricematchCustomerName">{l s='Your name' mod='pricematch'}<sup>*</sup></label>
-				<input name="customer_name" type="text" class="form-control required" id="pricematchCustomerName" placeholder="{l s='Your name' mod='pricematch'}" value="{$customer_name}"/>
-				<input type="hidden" name="id_customer" value="{$id_customer}" />
+				<input name="customer_name" type="text" class="form-control required" id="pricematchCustomerName" placeholder="{l s='Your name' mod='pricematch'}" value="{$customer_name|escape:'htmlall':'UTF-8'}"/>
+				<input type="hidden" name="id_customer" value="{$id_customer|intval}" />
 			</div>
 			<div class="col-sm-6 col-xs-12">
 				<label for="pricematchEmail">{l s='Email' mod='pricematch'}<sup>*</sup></label>			
@@ -40,7 +40,7 @@
 			<div class="col-xs-12">
 				<label for="pricemacthProduct">{l s='Product' mod='pricematch'}<sup>*</sup></label>
 				<input type="text" class="form-control" value="{$productName|escape:'htmlall':'UTF-8'}"/>
-				<input type="hidden" name="id_product" value="{$id_product}"/>
+				<input type="hidden" name="id_product" value="{$id_product|intval}"/>
 			</div>
 		</div>
 		<div class="form-group clearfix">
