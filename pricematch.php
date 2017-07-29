@@ -32,8 +32,6 @@ class PriceMatch extends Module
         $this->log_file = _PS_ROOT_DIR_.'/log/pricematch.log';
         $this->mails_dir = $this->local_path.'/mails/';
         $this->confirmUninstall = $this->l('Are you sure you want to delete this module?');
-
-        $this->prepareTranslationsForStatuses();
     }
 
     public function install()
@@ -97,7 +95,7 @@ class PriceMatch extends Module
                 }
                 else {
                     $description[(int)$language['id_lang']] = $value;
-                } 
+                }
             }
             if (!count($this->_errors)) {
                 Configuration::updateValue('ODEV_PRICEMATCH_DESCRIPTION', $description, true);
@@ -318,25 +316,5 @@ class PriceMatch extends Module
     public function getLogFile()
     {
         return $this->log_file;
-    }
-
-    public function getTransaltionsForStatuses($return = true)
-    {
-        $statuses = MatchRequestModel::getStatuses(true);
-        $result = array();
-        foreach ($statuses as $key => $status) {
-            $result[$key] = $this->l($status);
-        }
-        if ($return) {
-            return $result;
-        }
-
-    }
-
-    public function prepareTranslationsForStatuses()
-    {
-        $this->l('Rejected');
-        $this->l('Accepted');
-        $this->l('Proessing');
     }
 }

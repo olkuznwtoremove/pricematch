@@ -47,7 +47,7 @@ class AdminPriceMatchRequestsController extends ModuleAdminController
             'competitor_price' => array(
                 'title' => $this->l('Competitor price'),
                 'type' => 'price'
-            ),            
+            ),
             'state' => array(
                 'title' => $this->l('State'),
                 'list' => $this->getTranslatedStatus(),
@@ -58,7 +58,7 @@ class AdminPriceMatchRequestsController extends ModuleAdminController
                 'title' => $this->l('Date'),
                 'align' => 'text-right',
                 'type' => 'datetime',
-            ),            
+            ),
         );
         $this->_select = ' pl.name';
         $this->_join = '
@@ -78,19 +78,19 @@ class AdminPriceMatchRequestsController extends ModuleAdminController
     }
     
     public function processDelete()
-    {        
+    {
         $object = $this->loadObject();
         
         if (Validate::isLoadedObject($object = $this->loadObject())) {
             $object->active = 0;
             $object->save();
-        }        
+        }
         return $object;
     }
     
     /**
      * AdminController::renderForm() override
-     * 
+     *
      * @see AdminController::renderForm()
      */
     public function renderForm() 
@@ -156,7 +156,7 @@ class AdminPriceMatchRequestsController extends ModuleAdminController
                     'name' => 'date_add',
                     'disabled' => 'disabled',
                     'col' => '4',
-                ),                
+                ),
                 array(
                     'type' => 'dropdown',
                     'label' => $this->l('State'),
@@ -193,7 +193,7 @@ class AdminPriceMatchRequestsController extends ModuleAdminController
                 if (!$to_delete->update()) {
                     $result = false;
                     $this->errors[] = sprintf(Tools::displayError('Can\'t delete #%d'), $id);
-                }    
+                }
             }
             if ($result) {
                 $this->redirect_after = self::$currentIndex.'&conf=2&token='.$this->token;
@@ -241,8 +241,8 @@ class AdminPriceMatchRequestsController extends ModuleAdminController
                 null,
                 $module->getMailsDir(),
                 false,
-                $this->context->shop->id)
-            )
+                $this->context->shop->id
+            ))
             {
                 $logger    = new FileLogger();
                 $logger->setFilename($module->getLogFile());
