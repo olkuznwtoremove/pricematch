@@ -35,29 +35,29 @@ class AdminPriceMatchRequestsController extends ModuleAdminController
         parent::__construct();
         $this->fields_list = array(
             'name' => array(
-                'title'            => $this->l('Product'), 
-                'filter_key'    => 'pl!name'
+                'title' => $this->l('Product'),
+                'filter_key' => 'pl!name'
             ),
             'customer_name' => array(
-                'title'        => $this->l('Customer name')
+                'title' => $this->l('Customer name')
             ),
             'customer_email' => array(
                 'title' => $this->l('Customer email')
             ),
             'competitor_price' => array(
                 'title' => $this->l('Competitor price'),
-                'type'    => 'price'
+                'type' => 'price'
             ),            
             'state' => array(
-                'title'            => $this->l('State'),
-                'list'            => $this->getTranslatedStatus(),
-                'filter_key'    => 'state',
-                'type'            => 'select',
+                'title' => $this->l('State'),
+                'list' => $this->getTranslatedStatus(),
+                'filter_key' => 'state',
+                'type' => 'select',
             ),
             'date_add' => array(
                 'title' => $this->l('Date'),
                 'align' => 'text-right',
-                'type'    => 'datetime',
+                'type' => 'datetime',
             ),            
         );
         $this->_select = ' pl.name';
@@ -97,71 +97,71 @@ class AdminPriceMatchRequestsController extends ModuleAdminController
     {
         $this->fields_form = array(
             'legend' => array(
-                'title'    => $this->l('Update request state'),
-                'icon'    => 'icon-info-sign'
+                'title' => $this->l('Update request state'),
+                'icon' => 'icon-info-sign'
             ),
             'input' => array(
                 array(
-                    'type'        => 'text',
-                    'label'        => $this->l('Product'),
-                    'name'        => 'product',
-                    'disabled'    => 'disabled',
-                    'col'        => '4',
+                    'type' => 'text',
+                    'label' => $this->l('Product'),
+                    'name' => 'product',
+                    'disabled' => 'disabled',
+                    'col' => '4',
                 ),
                 array(
-                    'type'        => 'text',
-                    'label'        => $this->l('Customer name'),
-                    'name'        => 'customer_name',
-                    'disabled'    => 'disabled',
-                    'col'        => '4',
+                    'type' => 'text',
+                    'label' => $this->l('Customer name'),
+                    'name' => 'customer_name',
+                    'disabled' => 'disabled',
+                    'col' => '4',
                 ),
                 array(
-                    'type'        => 'text',
-                    'label'        => $this->l('Customer email'),
-                    'name'        => 'customer_email',
-                    'disabled'    => 'disabled',
-                    'col'        => '4',
+                    'type' => 'text',
+                    'label' => $this->l('Customer email'),
+                    'name' => 'customer_email',
+                    'disabled' => 'disabled',
+                    'col' => '4',
                 ),
                 array(
-                    'type'        => 'text',
-                    'label'        => $this->l('Customer phone'),
-                    'name'        => 'customer_phone',
-                    'disabled'    => 'disabled',
-                    'col'        => '4',
+                    'type' => 'text',
+                    'label' => $this->l('Customer phone'),
+                    'name' => 'customer_phone',
+                    'disabled' => 'disabled',
+                    'col' => '4',
                 ),
                 
                 array(
-                    'type'        => 'text',
-                    'label'        => $this->l('Competitor price'),
-                    'name'        => 'competitor_price',
-                    'disabled'    => 'disabled',
+                    'type' => 'text',
+                    'label' => $this->l('Competitor price'),
+                    'name' => 'competitor_price',
+                    'disabled' => 'disabled',
                     'string_format' => '%.2f',
-                    'col'        => '4',
+                    'col' => '4',
                 ),
                 array(
-                    'type'    => 'href',
-                    'label'    => $this->l('Competitor url'),
-                    'name'    => 'competitor_url',
+                    'type' => 'href',
+                    'label' => $this->l('Competitor url'),
+                    'name' => 'competitor_url',
                 ),
                 array(
-                    'type'        => 'comment',
-                    'label'        => $this->l('Comment'),
-                    'name'        => 'comment',
-                    'disabled'    => 'disabled',
-                    'col'        => '4',
+                    'type' => 'comment',
+                    'label' => $this->l('Comment'),
+                    'name' => 'comment',
+                    'disabled' => 'disabled',
+                    'col' => '4',
                 ),
                 array(
-                    'type'        => 'text',
-                    'label'        => $this->l('Date'),
-                    'name'        => 'date_add',
-                    'disabled'    => 'disabled',
-                    'col'        => '4',
+                    'type' => 'text',
+                    'label' => $this->l('Date'),
+                    'name' => 'date_add',
+                    'disabled' => 'disabled',
+                    'col' => '4',
                 ),                
                 array(
-                    'type'        => 'dropdown',
-                    'label'        => $this->l('State'),
-                    'name'        => 'state',
-                    'options'    => $this->getTranslatedStatus(),
+                    'type' => 'dropdown',
+                    'label' => $this->l('State'),
+                    'name' => 'state',
+                    'options' => $this->getTranslatedStatus(),
                 )
             )
         );
@@ -241,7 +241,8 @@ class AdminPriceMatchRequestsController extends ModuleAdminController
                 null,
                 $module->getMailsDir(),
                 false,
-                $this->context->shop->id))
+                $this->context->shop->id)
+            )
             {
                 $logger    = new FileLogger();
                 $logger->setFilename($module->getLogFile());

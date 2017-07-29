@@ -97,7 +97,7 @@ class PriceMatch extends Module
                 }
                 else {
                     $description[(int)$language['id_lang']] = $value;
-                }
+                } 
             }
             if (!count($this->_errors)) {
                 Configuration::updateValue('ODEV_PRICEMATCH_DESCRIPTION', $description, true);

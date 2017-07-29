@@ -75,7 +75,7 @@ class MatchRequestModel extends ObjectModel
     {
         /* Classical fields */
         foreach ($_POST as $key => $value) {
-            if (array_key_exists($key, $this) AND $key != 'id_'.$this->table) {
+            if (array_key_exists($key, $this) and $key != 'id_'.self::$definition['table']) {
                 $this->{$key} = htmlspecialchars(trim($value));
             }
         }

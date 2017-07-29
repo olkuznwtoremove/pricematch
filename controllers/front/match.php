@@ -23,8 +23,8 @@ class PriceMatchMatchModuleFrontController extends ModuleFrontController
         $matchRequest->copyFromPost();
         $errors = $matchRequest->validateController();
         $result = array(
-            'hasError'    => true,
-            'messages'    => Tools::displayError('Some error occurred.'),
+            'hasError' => true,
+            'messages' => Tools::displayError('Some error occurred.'),
         );
         if (empty($errors)) {
             if ($matchRequest->save()) {
@@ -32,8 +32,8 @@ class PriceMatchMatchModuleFrontController extends ModuleFrontController
                 $this->sendAdminEmail($matchRequest);
                 $this->sendCustomerEmail($matchRequest);
                 $result = array(
-                    'hasError'    => false,
-                    'messages'    => Tools::displayError('Thank you for request!'),
+                    'hasError' => false,
+                    'messages' => Tools::displayError('Thank you for request!'),
                 );
             }
         }
@@ -68,7 +68,8 @@ class PriceMatchMatchModuleFrontController extends ModuleFrontController
                 null,
                 $this->module->getMailsDir(),
                 false,
-                $this->context->shop->id))
+                $this->context->shop->id)
+            )
             {
                 $logger    = new FileLogger();
                 $logger->setFilename($this->module->getLogFile());
@@ -97,7 +98,12 @@ class PriceMatchMatchModuleFrontController extends ModuleFrontController
                 $matchRequest->customer_name,
                 Configuration::get('PS_SHOP_EMAIL'),
                 Configuration::get('PS_SHOP_NAME'),
-                null, null, $this->module->getMailsDir(), false, $this->context->shop->id))
+                null,
+                null,
+                $this->module->getMailsDir(),
+                false,
+                $this->context->shop->id)
+            )
             {
                 $logger    = new FileLogger();
                 $logger->setFilename($this->module->getLogFile());
