@@ -46,8 +46,9 @@ class PriceMatch extends Module
                 `customer_phone` varchar(32) NULL,
                 `competitor_price` decimal(20,6) NOT NULL DEFAULT '0.000000',
                 `competitor_url` varchar(255) NOT NULL,
-                `comment` text NOT NULL,  
-                `state` enum(". implode(',', MatchRequestModel::getStatuses(true)).") NOT NULL DEFAULT 'processing',
+                `comment` text NOT NULL,
+                `date_add` datetime NOT NULL,
+                `state` enum('". implode("','", MatchRequestModel::getStatuses(true))."') NOT NULL DEFAULT 'processing',
                 `active` tinyint(1) NOT NULL DEFAULT '1',
                 PRIMARY KEY (`id_odev_price_match`),
                 KEY `id_product` (`id_product`)

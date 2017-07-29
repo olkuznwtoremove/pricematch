@@ -14,7 +14,7 @@
 	<div class="pricematch-error col-xs-12"></div>
 	<div class="std col-xs-12">
 		{if !empty($description)}
-			{$description|escape:'htmlall':'UTF-8'}
+			{$description|escape:'UTF-8'}
 		{/if}
 	</div>
 	<form id="pricematchForm" method="post" action="{$pricematchUrl|escape:'htmlall':'UTF-8'}">

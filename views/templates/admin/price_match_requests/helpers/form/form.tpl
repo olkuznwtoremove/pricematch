@@ -27,7 +27,7 @@
 												{if isset($input.size)}size="{$input.size|escape:'html':'utf-8'}"{/if}
 												{if isset($input.onchange)}onchange="{$input.onchange|escape:'html':'utf-8'}"{/if}>
 			{foreach from=$input.options item="option" key="key"}
-				<option value="{$key}" {if $key == $fields_value[$input.name]|escape:'html':'UTF-8'}selected="selected"{/if}>
+				<option value="{$key|escape:'html':'UTF-8'}" {if $key == $fields_value[$input.name]|escape:'html':'UTF-8'}selected="selected"{/if}>
 					{$option|escape:'htmlall':'UTF-8'}
 				</option>
 			{/foreach}
