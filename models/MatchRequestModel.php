@@ -41,30 +41,30 @@ class MatchRequestModel extends ObjectModel
 
     public $active = true;
 
-    CONST STATE_PROCESSING = 'processing';
-    CONST STATE_ACCEPTED = 'accepted';
-    CONST STATE_REJECTED = 'rejected';
+    const STATE_PROCESSING = 'processing';
+    const STATE_ACCEPTED = 'accepted';
+    const STATE_REJECTED = 'rejected';
     
     /**
      * @see ObjectModel::$definition
      */
     public static $definition = array(
         'table' => 'odev_price_match',
-        'primary'	=> 'id_odev_price_match',
-        'fields'	=> array(
-            'id_odev_price_match'	=> array('type' => self::TYPE_INT, 'validate' => 'isInt'),
-            'id_product'			=> array('type' => self::TYPE_INT, 'validate' => 'isInt', 'required' => true),
-            'id_shop'				=> array('type' => self::TYPE_INT, 'validate' => 'isInt', 'required' => true),
-            'id_customer'			=> array('type' => self::TYPE_INT, 'validate' => 'isInt'),
-            'customer_name'			=> array('type' => self::TYPE_STRING, 'validate' => 'isName', 'required' => true, 'size' => 128),
-            'customer_email'		=> array('type' => self::TYPE_STRING, 'validate' => 'isEmail', 'required' => true, 'size' => 128),
-            'customer_phone'		=> array('type' => self::TYPE_STRING, 'validate' => 'isPhoneNumber', 'size' => 32),
-            'competitor_price'		=> array('type' => self::TYPE_FLOAT, 'validate' => 'isPrice', 'required' => true),
-            'competitor_url'		=> array('type' => self::TYPE_STRING, 'validate' => 'isUrl', 'required' => true, 'size' => 255),
-            'comment'				=> array('type' => self::TYPE_STRING, 'validate' => 'isMessage'),
-            'state'					=> array('type' => self::TYPE_STRING, 'validate' => 'isString'),
-            'active'				=> array('type' => self::TYPE_BOOL, 'validate' => 'isBool'),
-            'date_add'				=> array('type' => self::TYPE_DATE, 'validate' => 'isDateFormat'),
+        'primary' => 'id_odev_price_match',
+        'fields' => array(
+            'id_odev_price_match' => array('type' => self::TYPE_INT, 'validate' => 'isInt'),
+            'id_product' => array('type' => self::TYPE_INT, 'validate' => 'isInt', 'required' => true),
+            'id_shop' => array('type' => self::TYPE_INT, 'validate' => 'isInt', 'required' => true),
+            'id_customer' => array('type' => self::TYPE_INT, 'validate' => 'isInt'),
+            'customer_name' => array('type' => self::TYPE_STRING, 'validate' => 'isName', 'required' => true, 'size' => 128),
+            'customer_email' => array('type' => self::TYPE_STRING, 'validate' => 'isEmail', 'required' => true, 'size' => 128),
+            'customer_phone' => array('type' => self::TYPE_STRING, 'validate' => 'isPhoneNumber', 'size' => 32),
+            'competitor_price' => array('type' => self::TYPE_FLOAT, 'validate' => 'isPrice', 'required' => true),
+            'competitor_url' => array('type' => self::TYPE_STRING, 'validate' => 'isUrl', 'required' => true, 'size' => 255),
+            'comment' => array('type' => self::TYPE_STRING, 'validate' => 'isMessage'),
+            'state' => array('type' => self::TYPE_STRING, 'validate' => 'isString'),
+            'active' => array('type' => self::TYPE_BOOL, 'validate' => 'isBool'),
+            'date_add' => array('type' => self::TYPE_DATE, 'validate' => 'isDateFormat'),
         ),
     );
 
@@ -74,7 +74,7 @@ class MatchRequestModel extends ObjectModel
     public function copyFromPost()
     {
         /* Classical fields */
-        foreach ($_POST AS $key => $value) {
+        foreach ($_POST as $key => $value) {
             if (array_key_exists($key, $this) AND $key != 'id_'.$this->table) {
                 $this->{$key} = htmlspecialchars(trim($value));
             }

@@ -18,16 +18,16 @@ class PriceMatch extends Module
 
     public function __construct()
     {
-        $this->name		= 'pricematch';
-        $this->tab		= 'front_office_features';
-        $this->version	= '1.0.0';
-        $this->author	= 'Odevme';
+        $this->name = 'pricematch';
+        $this->tab = 'front_office_features';
+        $this->version = '1.0.0';
+        $this->author = 'Odevme';
         $this->controllers = array('match');
         parent::__construct();
 
         $this->bootstrap = true;
-        $this->displayName	= $this->l('Price Match');
-        $this->description	= $this->l('Product Price Match	Module.');
+        $this->displayName = $this->l('Price Match');
+        $this->description = $this->l('Product Price Match Module.');
 
         $this->log_file = _PS_ROOT_DIR_.'/log/pricematch.log';
         $this->mails_dir = $this->local_path.'/mails/';
@@ -43,13 +43,13 @@ class PriceMatch extends Module
                 `id_odev_price_match` int(11) NOT NULL AUTO_INCREMENT,
                 `id_product` int(11) NOT NULL,
                 `id_shop` int(11) NOT NULL,
-                `id_customer` int(11) NULL,				
+                `id_customer` int(11) NULL,  
                 `customer_name` varchar(128) CHARACTER SET utf8 COLLATE utf8_estonian_ci NOT NULL,
                 `customer_email` varchar(128) NOT NULL,
                 `customer_phone` varchar(32) NULL,
                 `competitor_price` decimal(20,6) NOT NULL DEFAULT '0.000000',
                 `competitor_url` varchar(255) NOT NULL,
-                `comment` text NOT NULL,				
+                `comment` text NOT NULL,  
                 `state` enum(". implode(',', MatchRequestModel::getStatuses(true)).") NOT NULL DEFAULT 'processing',
                 `active` tinyint(1) NOT NULL DEFAULT '1',
                 PRIMARY KEY (`id_odev_price_match`),
@@ -95,7 +95,7 @@ class PriceMatch extends Module
                 if (!Validate::isCleanHtml($value)) {
                     $this->_errors[] = $this->l('Description can\'t contain any scripts!');
                 }
-                else{
+                else {
                     $description[(int)$language['id_lang']] = $value;
                 }
             }
@@ -112,9 +112,9 @@ class PriceMatch extends Module
 
         $helper = $this->initConfigurationForm();
         $helper->fields_value = array(
-            'admin_email'		=> Configuration::get('ODEV_PRICEMATCH_SEND_ADMIN_EMAIL'),
-            'customer_email'	=> Configuration::get('ODEV_PRICEMATCH_SEND_CUSTOMER_EMAIL'),
-            'description'		=> Configuration::getInt('ODEV_PRICEMATCH_DESCRIPTION'),
+            'admin_email' => Configuration::get('ODEV_PRICEMATCH_SEND_ADMIN_EMAIL'),
+            'customer_email' => Configuration::get('ODEV_PRICEMATCH_SEND_CUSTOMER_EMAIL'),
+            'description' => Configuration::getInt('ODEV_PRICEMATCH_DESCRIPTION'),
         );
         return $html.$helper->generateForm($this->fields_form);
     }
@@ -125,14 +125,14 @@ class PriceMatch extends Module
         if ($this->showPopup()) {
             $product = $this->context->controller->getProduct();
             $data = array(
-                'pricematchUrl'		=> $this->context->link->getModuleLink('pricematch', 'match'),
-                'id_product'		=> $product->id,
-                'productName'		=> $product->name,
-                'id_shop'			=> $this->context->shop->id,
-                'id_customer'		=> $this->context->customer->id,
-                'customer_name'		=> $this->context->customer->firstname,
-                'customer_email'	=> $this->context->customer->email,
-                'description'		=> Configuration::get('ODEV_PRICEMATCH_DESCRIPTION', $this->context->language->id),
+                'pricematchUrl' => $this->context->link->getModuleLink('pricematch', 'match'),
+                'id_product' => $product->id,
+                'productName' => $product->name,
+                'id_shop' => $this->context->shop->id,
+                'id_customer' => $this->context->customer->id,
+                'customer_name' => $this->context->customer->firstname,
+                'customer_email' => $this->context->customer->email,
+                'description' => Configuration::get('ODEV_PRICEMATCH_DESCRIPTION', $this->context->language->id),
             );
             $this->smarty->assign($data);
             return $this->display(__FILE__, 'pricematchpopup.tpl');
@@ -236,22 +236,22 @@ class PriceMatch extends Module
             ),
             'input' => array(
                 array(
-                    'type'			=> 'textarea',
-                    'label'			=> $this->l('Description on pricematch form'),
-                    'lang'			=> true,
-                    'name'			=> 'description',
-                    'cols'			=> 40,
-                    'rows'			=> 10,
-                    'autoload_rte'	=> true,
+                    'type' => 'textarea',
+                    'label' => $this->l('Description on pricematch form'),
+                    'lang' => true,
+                    'name' => 'description',
+                    'cols' => 40,
+                    'rows' => 10,
+                    'autoload_rte' => true,
                 ),
                 array(
-                    'type'		=> 'switch',
-                    'label'		=> $this->l('Send email for administrator'),
-                    'name'		=> 'admin_email',
-                    'required'	=> false,
-                    'class'		=> 't',
-                    'is_bool'	=> true,
-                    'values'	=> array(
+                    'type' => 'switch',
+                    'label' => $this->l('Send email for administrator'),
+                    'name' => 'admin_email',
+                    'required' => false,
+                    'class' => 't',
+                    'is_bool' => true,
+                    'values' => array(
                         array(
                             'value' => 1,
                             'label' => $this->l('Enabled')
@@ -263,13 +263,13 @@ class PriceMatch extends Module
                     ),
                 ),
                 array(
-                    'type'		=> 'switch',
-                    'label'		=> $this->l('Send email for customer'),
-                    'name'		=> 'customer_email',
-                    'required'	=> false,
-                    'class'		=> 't',
-                    'is_bool'	=> true,
-                    'values'	=> array(
+                    'type' => 'switch',
+                    'label' => $this->l('Send email for customer'),
+                    'name' => 'customer_email',
+                    'required' => false,
+                    'class' => 't',
+                    'is_bool' => true,
+                    'values' => array(
                         array(
                             'value' => 1,
                             'label' => $this->l('Enabled')
@@ -293,10 +293,10 @@ class PriceMatch extends Module
         $helper->token = Tools::getAdminTokenLite('AdminModules');
         foreach ($this->context->controller->getLanguages() as $language) {
             $helper->languages[] = array(
-                'id_lang'		=> $language['id_lang'],
-                'iso_code'		=> $language['iso_code'],
-                'name'			=> $language['name'],
-                'is_default'	=> $default_lang == $language['id_lang'] ? 1 : 0,
+                'id_lang' => $language['id_lang'],
+                'iso_code' => $language['iso_code'],
+                'name' => $language['name'],
+                'is_default' => $default_lang == $language['id_lang'] ? 1 : 0,
             );
         }
         $helper->currentIndex = AdminController::$currentIndex.'&configure='.$this->name;

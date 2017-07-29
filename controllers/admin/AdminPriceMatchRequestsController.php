@@ -85,7 +85,7 @@ class AdminPriceMatchRequestsController extends ModuleAdminController
             $object->active = 0;
             $object->save();
         }        
-        return $object;        
+        return $object;
     }
     
     /**
@@ -171,7 +171,7 @@ class AdminPriceMatchRequestsController extends ModuleAdminController
         $this->fields_value['product'] = $product->name;
         $this->fields_form['submit'] = array(
             'title' => $this->l('Save'),
-        );        
+        );
         return parent::renderForm();
     }
     
@@ -216,12 +216,12 @@ class AdminPriceMatchRequestsController extends ModuleAdminController
                 case MatchRequestModel::STATE_ACCEPTED:
                     $mailSubject = Mail::l('You price match request was accepted.', $this->context->language->id);
                     $mailTemplate = 'pricematche_request_customer_accepted';
-                break;
+                    break;
 
                 case MatchRequestModel::STATE_REJECTED:
                     $mailSubject = Mail::l('You price match request was rejected.', $this->context->language->id);
                     $mailTemplate = 'pricematche_request_customer_rejected';
-                break;
+                    break;
                 default:
                     return true;
             }
@@ -237,7 +237,11 @@ class AdminPriceMatchRequestsController extends ModuleAdminController
                 $object->customer_name,
                 Configuration::get('PS_SHOP_EMAIL'),
                 Configuration::get('PS_SHOP_NAME'),
-                null, null, $module->getMailsDir(), false, $this->context->shop->id))
+                null,
+                null,
+                $module->getMailsDir(),
+                false,
+                $this->context->shop->id))
             {
                 $logger    = new FileLogger();
                 $logger->setFilename($module->getLogFile());

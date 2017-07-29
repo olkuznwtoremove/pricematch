@@ -64,7 +64,11 @@ class PriceMatchMatchModuleFrontController extends ModuleFrontController
                 Configuration::get('PS_SHOP_NAME'),
                 null,
                 null,
-                null, null, $this->module->getMailsDir(), false, $this->context->shop->id))
+                null,
+                null,
+                $this->module->getMailsDir(),
+                false,
+                $this->context->shop->id))
             {
                 $logger    = new FileLogger();
                 $logger->setFilename($this->module->getLogFile());
