@@ -92,8 +92,7 @@ class PriceMatch extends Module
                 $value = trim(Tools::getValue('description_'.(int)$language['id_lang'], ''));
                 if (!Validate::isCleanHtml($value)) {
                     $this->_errors[] = $this->l('Description can\'t contain any scripts!');
-                }
-                else {
+                } else {
                     $description[(int)$language['id_lang']] = $value;
                 }
             }
@@ -102,8 +101,7 @@ class PriceMatch extends Module
                 Configuration::updateValue('ODEV_PRICEMATCH_SEND_ADMIN_EMAIL', (int)Tools::getValue('admin_email'));
                 Configuration::updateValue('ODEV_PRICEMATCH_SEND_CUSTOMER_EMAIL', (int)Tools::getValue('customer_email'));
                 Tools::redirectAdmin($this->getConfigurationUrl().'&conf=4');
-            }
-            else {
+            } else {
                 $html .= $this->displayError(implode('</br>', $this->_errors));
             }
         }

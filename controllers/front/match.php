@@ -36,8 +36,7 @@ class PriceMatchMatchModuleFrontController extends ModuleFrontController
                     'messages' => Tools::displayError('Thank you for request!'),
                 );
             }
-        }
-        else {
+        } else {
             $result['messages'] = implode('<br/>', $result);
         }
         die(Tools::jsonEncode($result));

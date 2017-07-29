@@ -197,12 +197,10 @@ class AdminPriceMatchRequestsController extends ModuleAdminController
             }
             if ($result) {
                 $this->redirect_after = self::$currentIndex.'&conf=2&token='.$this->token;
-            }
-            else {
+            } else {
                 $this->errors[] = Tools::displayError('An error occurred while deleting this selection.');
             }
-        }
-        else {
+        } else {
             $this->errors[] = Tools::displayError('You must select at least one element to delete.');
         }
         return isset($result);
