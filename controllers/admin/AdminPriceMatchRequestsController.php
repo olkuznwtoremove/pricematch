@@ -93,7 +93,7 @@ class AdminPriceMatchRequestsController extends ModuleAdminController
      *
      * @see AdminController::renderForm()
      */
-    public function renderForm() 
+    public function renderForm()
     {
         $this->fields_form = array(
             'legend' => array(
@@ -241,8 +241,8 @@ class AdminPriceMatchRequestsController extends ModuleAdminController
                 null,
                 $module->getMailsDir(),
                 false,
-                $this->context->shop->id
-            ))
+                $this->context->shop->id )
+            )
             {
                 $logger    = new FileLogger();
                 $logger->setFilename($module->getLogFile());

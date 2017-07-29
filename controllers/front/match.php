@@ -68,8 +68,8 @@ class PriceMatchMatchModuleFrontController extends ModuleFrontController
                 null,
                 $this->module->getMailsDir(),
                 false,
-                $this->context->shop->id
-            ))
+                $this->context->shop->id )
+            )
             {
                 $logger    = new FileLogger();
                 $logger->setFilename($this->module->getLogFile());
