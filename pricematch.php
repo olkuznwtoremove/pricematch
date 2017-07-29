@@ -12,7 +12,6 @@
 require_once dirname(__FILE__).'/models/MatchRequestModel.php';
 class PriceMatch extends Module
 {
-    protected $table = 'odev_price_match';
     protected $log_file = '';
     protected $mails_dir = '';
 
@@ -37,7 +36,7 @@ class PriceMatch extends Module
     public function install()
     {
         $tableSql = "
-            CREATE TABLE IF NOT EXISTS `"._DB_PREFIX_.$this->table."`(
+            CREATE TABLE IF NOT EXISTS `"._DB_PREFIX_.MatchRequestModel::$definition['table']."`(
                 `id_odev_price_match` int(11) NOT NULL AUTO_INCREMENT,
                 `id_product` int(11) NOT NULL,
                 `id_shop` int(11) NOT NULL,
@@ -77,7 +76,7 @@ class PriceMatch extends Module
             Configuration::deleteByName('ODEV_PRICEMATCH_SEND_ADMIN_EMAIL') &&
             Configuration::deleteByName('ODEV_PRICEMATCH_SEND_CUSTOMER_EMAIL') &&
             Configuration::deleteByName('ODEV_PRICEMATCH_DESCRIPTION') &&
-            DB::getInstance()->execute("DROP TABLE IF EXISTS `"._DB_PREFIX_.$this->table."`") &&
+            DB::getInstance()->execute("DROP TABLE IF EXISTS `"._DB_PREFIX_.MatchRequestModel::$definition['table']."`") &&
             parent::uninstall()
         );
     }
