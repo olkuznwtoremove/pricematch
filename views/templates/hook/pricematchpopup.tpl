@@ -14,10 +14,10 @@
 	<div class="pricematch-error col-xs-12"></div>
 	<div class="std col-xs-12">
 		{if !empty($description)}
-			{$description}
+			{$description|escape:'htmlall':'UTF-8'}
 		{/if}
 	</div>
-	<form id="pricematchForm" method="post" action="{$pricematchUrl}">
+	<form id="pricematchForm" method="post" action="{$pricematchUrl|escape:'htmlall':'UTF-8'}">
 		<input type="hidden" name="id_shop" value="{$id_shop}" />
 		<div class="form-group clearfix">
 			<div class="col-sm-6 col-xs-12">
@@ -27,7 +27,7 @@
 			</div>
 			<div class="col-sm-6 col-xs-12">
 				<label for="pricematchEmail">{l s='Email' mod='pricematch'}<sup>*</sup></label>			
-				<input name="customer_email" type="email" class="form-control required" id="pricematchEmail" placeholder="{l s='Email' mod='pricematch'}" value="{$customer_email}"/>
+				<input name="customer_email" type="email" class="form-control required" id="pricematchEmail" placeholder="{l s='Email' mod='pricematch'}" value="{$customer_email|escape:'htmlall':'UTF-8'}"/>
 			</div>		
 		</div>
 		<div class="form-group clearfix">
@@ -39,7 +39,7 @@
 		<div class="form-group clearfix">
 			<div class="col-xs-12">
 				<label for="pricemacthProduct">{l s='Product' mod='pricematch'}<sup>*</sup></label>
-				<input type="text" class="form-control" value="{$productName}"/>
+				<input type="text" class="form-control" value="{$productName|escape:'htmlall':'UTF-8'}"/>
 				<input type="hidden" name="id_product" value="{$id_product}"/>
 			</div>
 		</div>

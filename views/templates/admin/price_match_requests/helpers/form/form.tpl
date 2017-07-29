@@ -28,7 +28,7 @@
 												{if isset($input.onchange)}onchange="{$input.onchange|escape:'html':'utf-8'}"{/if}>
 			{foreach from=$input.options item="option" key="key"}
 				<option value="{$key}" {if $key == $fields_value[$input.name]}selected="selected"{/if}>
-					{$option}
+					{$option|escape:'htmlall':'UTF-8'}
 				</option>
 			{/foreach}
 			</select>
