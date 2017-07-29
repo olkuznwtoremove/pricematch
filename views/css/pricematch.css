@@ -1,0 +1,39 @@
+.pricematchpopup {
+	display: none;
+}
+
+.pricematchpopup .red {
+	border-color: red;
+}
+
+.pricematch-error {
+	color: red;
+	font-size: 15px;
+}
+
+.pricematch-loader {
+	background-image: url(../img/ajax-loader.gif);
+    background-color: rgba(255, 255, 255, 0.6);
+    background-repeat: no-repeat;
+    background-position: 50%;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+	display: none;
+}
+
+.pricematch-block .pricematch-button {
+    color: #333333;
+    border-color: #cccccc;
+    background: white;
+    font-weight: 300;
+    margin: 10px;
+    padding: 10px;
+}
+
+.pricematch-block .pricematch-button:hover {
+    background: #b4daea;
+    border-color: #b4daea;
+    color: white;
+}

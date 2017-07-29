@@ -1,0 +1,4 @@
+
+[{shop_url}]
+Hi, {customer}.
+Your price request #{id_request} was rejected, please contact us for details.

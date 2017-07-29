@@ -1,0 +1,4 @@
+
+[{shop_url}] 
+Hi, {customer}.
+Thank you for request! We will contact you later.

@@ -1,0 +1,4 @@
+
+[{shop_url}]
+Hi, {customer}.
+Your price request #{id_request} was accepted, we will contact you later.
