@@ -14,6 +14,8 @@ require_once dirname(__FILE__).'/../../pricematch.php';
 
 class AdminPriceMatchRequestsController extends ModuleAdminController
 {
+    protected static $translationStatuses = array();
+
     public function __construct()
     {
         $this->bootstrap = true;
@@ -53,6 +55,7 @@ class AdminPriceMatchRequestsController extends ModuleAdminController
                 'list' => $this->getTranslatedStatus(),
                 'filter_key' => 'state',
                 'type' => 'select',
+                'callback' => 'displayTranslatedStatus',
             ),
             'date_add' => array(
                 'title' => $this->l('Date'),
@@ -257,12 +260,28 @@ class AdminPriceMatchRequestsController extends ModuleAdminController
      */
     public function getTranslatedStatus($useKey = false)
     {
-        $translations = array(
-            $this->l('Processing'),
-            $this->l('Accepted'),
-            $this->l('Rejected'),
-        );
-        $statuses = MatchRequestModel::getStatuses($useKey);
-        return array_combine(array_keys($statuses), $translations);
+        if (empty(self::$translationStatuses)) {
+            $translations = array(
+                $this->l('Processing'),
+                $this->l('Accepted'),
+                $this->l('Rejected'),
+            );
+            $statuses = MatchRequestModel::getStatuses($useKey);
+            self::$translationStatuses = array_combine(array_keys($statuses), $translations);
+        }
+        return self::$translationStatuses;
+    }
+
+    /**
+     * Show translated label state
+     *
+     * @param $value
+     * @param $row
+     * @return string
+     */
+    public function displayTranslatedStatus($value, $row)
+    {
+        $statuses = $this->getTranslatedStatus();
+        return $statuses[$value];
     }
 }
