@@ -16,6 +16,9 @@ class AdminPriceMatchRequestsController extends ModuleAdminController
 {
     protected static $translationStatuses = array();
 
+    /**
+     * AdminPriceMatchRequestsController constructor.
+     */
     public function __construct()
     {
         $this->bootstrap = true;
@@ -73,13 +76,21 @@ class AdminPriceMatchRequestsController extends ModuleAdminController
         $this->_orderBy = 'date_add';
         $this->_orderWay = 'desc';
     }
-    
+
+    /**
+     * Set media
+     */
     public function setMedia()
     {
         parent::setMedia();
         $this->addJqueryUI('ui.datepicker');
     }
-    
+
+    /**
+     * Precess delete
+     *
+     * @return MatchRequestModel
+     */
     public function processDelete()
     {
         $object = $this->loadObject();
@@ -177,7 +188,10 @@ class AdminPriceMatchRequestsController extends ModuleAdminController
         );
         return parent::renderForm();
     }
-    
+
+    /**
+     * Precess toolbar
+     */
     public function initToolbar()
     {
         parent::initToolbar();
@@ -185,7 +199,12 @@ class AdminPriceMatchRequestsController extends ModuleAdminController
             unset($this->toolbar_btn['new']);
         }
     }
-    
+
+    /**
+     * Bulk delete process
+     *
+     * @return bool
+     */
     protected function processBulkDelete()
     {
         if (is_array($this->boxes) && !empty($this->boxes)) {
@@ -208,7 +227,14 @@ class AdminPriceMatchRequestsController extends ModuleAdminController
         }
         return isset($result);
     }
-    
+
+    /**
+     * After update method
+     * send customer, admin emails
+     *
+     * @param $object
+     * @return bool
+     */
     public function afterUpdate($object)
     {
         if (Configuration::get('ODEV_PRICEMATCH_SEND_CUSTOMER_EMAIL')) {

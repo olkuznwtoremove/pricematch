@@ -11,12 +11,18 @@
 
 class PriceMatchMatchModuleFrontController extends ModuleFrontController
 {
+    /**
+     * PriceMatchMatchModuleFrontController constructor.
+     */
     public function __construct()
     {
         parent::__construct();
         $this->className = 'MatchRequestModel';
     }
 
+    /**
+     * Process pricematch request
+     */
     public function postProcess()
     {
         $matchRequest = new $this->className();

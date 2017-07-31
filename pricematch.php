@@ -33,6 +33,11 @@ class PriceMatch extends Module
         $this->confirmUninstall = $this->l('Are you sure you want to delete this module?');
     }
 
+    /**
+     * Install module
+     *
+     * @return bool
+     */
     public function install()
     {
         $tableSql = "
@@ -70,6 +75,11 @@ class PriceMatch extends Module
         );
     }
 
+    /**
+     * Uninstall module
+     *
+     * @return bool
+     */
     public function uninstall()
     {
         $this->removeAdminTabs();
@@ -82,6 +92,11 @@ class PriceMatch extends Module
         );
     }
 
+    /**
+     * Create module configuration pages
+     *
+     * @return string
+     */
     public function getContent()
     {
         $html = '';
@@ -115,6 +130,11 @@ class PriceMatch extends Module
         return $html.$helper->generateForm($this->fields_form);
     }
 
+    /**
+     * Prepare pricematch popup template
+     *
+     * @return string
+     */
     public function hookDisplayFooter()
     {
         // add pricematch popup
@@ -133,8 +153,14 @@ class PriceMatch extends Module
             $this->smarty->assign($data);
             return $this->display(__FILE__, 'pricematchpopup.tpl');
         }
+        return '';
     }
 
+    /**
+     * Add module styles and scripts
+     *
+     * @param array $params
+     */
     public function hookHeader($params = array())
     {
         // add module styles
@@ -144,21 +170,33 @@ class PriceMatch extends Module
         }
     }
 
+    /**
+     * Add prepare pricematch buttons
+     *
+     * @param array $params
+     * @return string
+     */
     public function hookDisplayProductButtons($params = array())
     {
         // add 'Show popup' button
         if ($this->showPopup()) {
             return $this->display(__FILE__, 'pricematchblock.tpl');
         }
+        return '';
     }
 
+    /**
+     * Prepare module configuration url
+     *
+     * @return string
+     */
     public function getConfigurationUrl()
     {
         return $this->context->link->getAdminLink('AdminModules').'&configure='.$this->name.'&tab_module='.$this->tab.'&module_name='.$this->name;
     }
 
     /**
-     * Check should we popup
+     * Check should we show popup
      *
      * @return bool
      */
@@ -217,6 +255,7 @@ class PriceMatch extends Module
         }
         return true;
     }
+
     /**
      * Init configuration form
      *
@@ -306,11 +345,21 @@ class PriceMatch extends Module
         return $helper;
     }
 
+    /**
+     * Return path to mails folder
+     *
+     * @return string
+     */
     public function getMailsDir()
     {
         return $this->mails_dir;
     }
 
+    /**
+     * Return path to log file
+     *
+     * @return string
+     */
     public function getLogFile()
     {
         return $this->log_file;
