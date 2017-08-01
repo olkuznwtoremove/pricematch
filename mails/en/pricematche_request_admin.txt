@@ -1,0 +1,5 @@
+
+[{shop_url}] 
+
+New price match request for product {product} has been added by {customer}. 
+Please check it in administrator's section.
