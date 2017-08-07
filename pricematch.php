@@ -45,7 +45,7 @@ class PriceMatch extends Module
                 `id_odev_price_match` int(11) NOT NULL AUTO_INCREMENT,
                 `id_product` int(11) NOT NULL,
                 `id_shop` int(11) NOT NULL,
-                `id_customer` int(11) NULL,  
+                `id_customer` int(11) NULL,
                 `customer_name` varchar(128) CHARACTER SET utf8 COLLATE utf8_estonian_ci NOT NULL,
                 `customer_email` varchar(128) NOT NULL,
                 `customer_phone` varchar(32) NULL,
@@ -57,8 +57,8 @@ class PriceMatch extends Module
                 `active` tinyint(1) NOT NULL DEFAULT '1',
                 PRIMARY KEY (`id_odev_price_match`),
                 KEY `id_product` (`id_product`)
-            ) 
-            ENGINE=InnoDB 
+            )
+            ENGINE=InnoDB
             DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
         ";
 
@@ -71,7 +71,8 @@ class PriceMatch extends Module
             Configuration::updateValue('ODEV_PRICEMATCH_DESCRIPTION') &&
             $this->registerHook('header') &&
             $this->registerHook('displayProductButtons') &&
-            $this->registerHook('displayFooter')
+            $this->registerHook('displayFooter') &&
+            $this->registerHook('datakickExtend')
         );
     }
 
@@ -183,6 +184,17 @@ class PriceMatch extends Module
             return $this->display(__FILE__, 'pricematchblock.tpl');
         }
         return '';
+    }
+
+    /**
+     * Integration with datakick data export module
+     *
+     * @param array $params
+     * @return array
+     */
+    public function hookDatakickExtend($params)
+    {
+      return MatchRequestModel::getDatakickSchema();
     }
 
     /**
