@@ -12,23 +12,23 @@
 class MatchRequestModel extends ObjectModel
 {
     public $id_odev_price_match;
-        
+
     public $id_product;
-    
+
     public $id_shop;
 
     public $id_customer;
-    
+
     public $customer_name;
-    
+
     public $customer_email;
 
     public $customer_phone;
-    
+
     public $competitor_price;
-    
+
     public $competitor_url;
-    
+
     public $comment;
 
     public $date_add;
@@ -44,7 +44,7 @@ class MatchRequestModel extends ObjectModel
     const STATE_PROCESSING = 'processing';
     const STATE_ACCEPTED = 'accepted';
     const STATE_REJECTED = 'rejected';
-    
+
     /**
      * @see ObjectModel::$definition
      */
@@ -110,5 +110,252 @@ class MatchRequestModel extends ObjectModel
             }
         }
         return $states;
+    }
+
+    /**
+     *  Integratin with datakick data export module
+     *
+     * @return array
+     */
+    public static function getDatakickSchema()
+    {
+      return array(
+        'priceMatchRequests' => array(
+          'id' => 'priceMatchRequests',
+          'singular' => 'priceMatchRequest',
+          'description' => 'Price Match Requests',
+          'parameters' => array('shop', 'language', 'defaultCurrency'),
+          'key' => array('id'),
+          'display' => 'name',
+          'category' => 'relationships',
+          'tables' => array(
+            'pmr' => array(
+              'table' => 'odev_price_match',
+              'conditions' => array(
+                'pmr.id_shop = <param:shop>'
+              )
+            ),
+            'c' => array(
+              'table' => 'customer',
+              'require' => array('pmr'),
+              'join' => array(
+                'type' => 'LEFT',
+                'conditions' => array(
+                  'c.id_customer = pmr.id_customer'
+                )
+              )
+            ),
+            'pl' => array(
+              'table' => 'product_lang',
+              'require' => array('pmr'),
+              'join' => array(
+                'type' => 'LEFT',
+                'conditions' => array(
+                  'pl.id_shop = pmr.id_shop',
+                  'pl.id_product = pmr.id_product',
+                  'pl.id_lang = <param:language>'
+                )
+              )
+            )
+          ),
+          'fields' => array(
+            'id' => array(
+              'type' => 'number',
+              'description' => 'id',
+              'require' => array('pmr'),
+              'sql' => 'pmr.id_odev_price_match',
+              'selectRecord' => 'priceMatchRequests',
+              'update' => false
+            ),
+            'productId' => array(
+              'type' => 'number',
+              'description' => 'product id',
+              'require' => array('pmr'),
+              'sql' => 'pmr.id_product',
+              'selectRecord' => 'products',
+              'update' => false
+            ),
+            'product' => array(
+              'type' => 'string',
+              'description' => 'product',
+              'require' => array('pl'),
+              'sql' => 'pl.name',
+              'update' => false
+            ),
+            'shopId' => array(
+              'type' => 'number',
+              'description' => 'shop id',
+              'require' => array('pmr'),
+              'sql' => 'pmr.id_shop',
+              'selectRecord' => 'shops',
+              'update' => false
+            ),
+            'customerId' => array(
+              'type' => 'number',
+              'description' => 'customer id',
+              'require' => array('pmr'),
+              'sql' => 'pmr.id_customer',
+              'selectRecord' => 'customers',
+              'update' => false
+            ),
+            'name' => array(
+              'type' => 'string',
+              'description' => 'name',
+              'require' => array('pmr'),
+              'sql' => 'pmr.customer_name',
+              'update' => array(
+                'pmr' => 'customer_name'
+              )
+            ),
+            'customerName' => array(
+              'type' => 'string',
+              'description' => 'customer name',
+              'require' => array('c'),
+              'sql' => 'TRIM(CONCAT(c.firstname, " ", c.lastname))',
+              'update' => false
+            ),
+            'email' => array(
+              'type' => 'string',
+              'description' => 'email',
+              'require' => array('pmr'),
+              'sql' => 'pmr.customer_email',
+              'update' => array(
+                'pmr' => 'customer_email'
+              )
+            ),
+            'phone' => array(
+              'type' => 'string',
+              'description' => 'phone',
+              'require' => array('pmr'),
+              'sql' => 'pmr.customer_phone',
+              'update' => array(
+                'pmr' => 'customer_phone'
+              )
+            ),
+            'competitorPrice' => array(
+              'type' => 'currency',
+              'description' => 'competitor price',
+              'require' => array('pmr'),
+              'sql' => array(
+                'value' => 'pmr.competitor_price',
+                'currency' => '<param:defaultCurrency>'
+              ),
+              'fixedCurrency' => true,
+              'update' => array(
+                'pmr' => array(
+                  'field' => array(
+                    'value' => 'competitor_price'
+                  )
+                )
+              )
+            ),
+            'competitorUrl' => array(
+              'type' => 'string',
+              'description' => 'competitor url',
+              'require' => array('pmr'),
+              'sql' => 'pmr.competitor_url',
+              'update' => array(
+                'pmr' => 'competitor_url'
+              )
+            ),
+            'comment' => array(
+              'type' => 'string',
+              'description' => 'comments',
+              'require' => array('pmr'),
+              'sql' => 'pmr.comment',
+              'update' => array(
+                'pmr' => 'comment'
+              )
+            ),
+            'active' => array(
+              'type' => 'boolean',
+              'description' => 'is active',
+              'require' => array('pmr'),
+              'sql' => 'pmr.active',
+              'update' => array(
+                'pmr' => 'active'
+              )
+            ),
+            'created' => array(
+              'type' => 'datetime',
+              'description' => 'date created',
+              'require' => array('pmr'),
+              'sql' => 'pmr.date_add',
+              'update' => array(
+                'pmr' => 'date_add'
+              )
+            ),
+            'state' => array(
+              'type' => 'string',
+              'description' => 'state',
+              'require' => array('pmr'),
+              'sql' => 'pmr.state',
+              'update' => array(
+                'pmr' => 'state'
+              ),
+              'values' => self::getStatuses(false)
+            )
+          ),
+          'expressions' => array(
+            'name' => array(
+              'type' => 'string',
+              'description' => 'customer name',
+              'expression' => 'coalesce(<field:customerName>, <field:name>)'
+            ),
+            'price' => array(
+              'type' => 'currency',
+              'description' => 'our price',
+              'expression' => 'productPrice(<field:productId>, 0, true)'
+            ),
+            'difference' => array(
+              'type' => 'currency',
+              'description' => 'difference',
+              'expression' => 'productPrice(<field:productId>, 0, true) - <field:competitorPrice>'
+            ),
+          ),
+          'links' => array(
+            'product' => array(
+              'description' => 'Product',
+              'collection' => 'products',
+              'type' => 'BELONGS_TO',
+              'sourceFields' => array('productId'),
+              'targetFields' => array('id')
+            ),
+            'customer' => array(
+              'description' => 'Customer',
+              'collection' => 'customers',
+              'type' => 'HAS_ONE',
+              'sourceFields' => array('customerId'),
+              'targetFields' => array('id')
+            ),
+          ),
+          'list' => array(
+            'columns' => array('id', 'name', 'product', 'competitorUrl', 'competitorPrice', 'price', 'difference', 'state'),
+            'sorts' => array('id')
+          )
+        ),
+        'products' => array(
+          'links' => array(
+            'priceMatchRequests' => array(
+              'description' => 'Price Match Requests',
+              'collection' => 'priceMatchRequests',
+              'type' => 'HAS_MANY',
+              'sourceFields' => array('id'),
+              'targetFields' => array('productId')
+            )
+          )
+        ),
+        'customers' => array(
+          'links' => array(
+            'priceAlert' => array(
+              'description' => 'Price Match Requests',
+              'collection' => 'priceMatchRequests',
+              'type' => 'HAS_MANY',
+              'sourceFields' => array('id'),
+              'targetFields' => array('customerId')
+            )
+          )
+        )
+      );
     }
 }
